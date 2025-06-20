@@ -1,0 +1,30 @@
+{
+  "pilotNames": [
+    "frank",
+    "peter"
+  ],
+  "pilotRank": [
+    "captain",
+    "instructor"
+  ],
+  "notifyEmailPilots": [
+    "email1",
+    "email2"
+  ],
+  "fixedDetailItems": [
+    "detail1",
+    "detail2"
+  ],
+  "fixedTaskItems": [
+    "fix1",
+    "fix2"
+  ],
+  "adminTableArray": [
+    "admin1",
+    "admin2"
+  ],
+  "pilotComments": [
+    "com1",
+    "com2"
+  ]
+}
