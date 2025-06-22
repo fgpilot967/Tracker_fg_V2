@@ -14,6 +14,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
+import { pilotNames, pilotRank } from './modules/arrays.js';
 
 window.saveTrackerData = saveTrackerData;
 window.loadTrackerData = loadTrackerData;
@@ -66,6 +67,19 @@ function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
     const validityCell = document.getElementById(`validityLiLane${row}Pilot${pilotNumber}`);
     if (validityCell) {
       validityCell.addEventListener("blur", () => calculateRow(pilotNumber, row));
+    }
+  }
+}
+
+//-----------------Update der Piloten-Tabellen Headline-Anzeige-----------------------------
+
+function updatePilotHeadlines() {
+  console.log("Headlines aktualisiert");
+  for (let i = 0; i < pilotNames.length; i++) {
+    const headline = document.getElementById(`headPilot${i + 1}`);
+    if (headline) {
+      const spacer = "\u2003"; // EM SPACE
+      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
     }
   }
 }

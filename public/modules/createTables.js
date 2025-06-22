@@ -1,7 +1,7 @@
 
-console.log("pilotTables.js geladen");
+console.log("createTables.js geladen");
 
-// pilotTables.js
+// createTables.js
 
 
 //--------------------Piloten Tabellen--------------------

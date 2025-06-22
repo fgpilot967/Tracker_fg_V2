@@ -1,5 +1,5 @@
 
-// calculation.js
+// calculations.js
 
 console.log("calculations.js geladen");
 
