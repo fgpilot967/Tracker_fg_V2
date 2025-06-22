@@ -25,7 +25,7 @@ export async function saveTrackerData() {
     // Hier kannst du später weitere Arrays ergänzen
   };
 
-  const response = await fetch("http://217.154.84.3:3000/save", {
+  const response = await fetch("https://tracker.fgienau.de/save", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user: `${user}`, data })
@@ -36,7 +36,7 @@ export async function saveTrackerData() {
 }
 
 export async function loadTrackerData() {
-  const response = await fetch(`http://217.154.84.3:3000/load/${user}`);
+  const response = await fetch(`https://tracker.fgienau.de/load/${user}`);
   if (!response.ok) throw new Error("Laden fehlgeschlagen");
 
   const result = await response.json();

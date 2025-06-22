@@ -5,21 +5,368 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tracker FG V2</title>
+  <!-- 🆕 Google Font (Inter) laden -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🛫 Tracker FG V2</h1>
 
-  <button onclick="saveTrackerData()">💾 Speichern</button>
-  <button onclick="loadTrackerData()">📂 Laden</button>
+    <div class="navbar">
+        <a class="tablinks" onclick="openTab(event, 'tables')">Tracker Tables</a>
 
-  <div id="pilotNames"></div>
-  <div id="pilotRank"></div>
-  <div id="pilotEmail"></div>
-  <div id="pilotDetail"></div>
-  <div id="pilotTask"></div>
-  <div id="pilotAdmin"></div>
-  <div id="pilotComment"></div>
+        <!-- Piloten Dropdown Liste --> 
+        <div class="dropdown">
+          <button class="dropbtn" onmouseenter="updatePilotDropdownFromTable()">Pilot Details<i class="fa fa-caret-down"></i></button>
+          <div class="dropdown-content" id="pilotDropdown">
+            <!--Hier kommt JavaScript rein-->
+          </div>
+        </div>
+
+        <a class="tablinks" onclick="openTab(event, 'setup')">Setup</a>
+
+        
+        <a id="saveButton" onclick="saveTrackerData()">💾 Speichern</a>
+        <a id="loadButton" onclick="loadTrackerData()">📂 Laden</a>
+        
+    </div>
+
+    <div class="navbar-spacer"></div>
+
+    <!-- Tracker Tables -->  
+    <div id="tables" class="tabcontent">
+
+      <div id="pilotTablesContainer"></div>
+
+    </div>
+
+    <!-- Pilot Details --> 
+    <div id="pilot1" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot1Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot1Rank"></h3>
+        </div> 
+        
+        <div>
+        <h3><label for="commentPilot1">Comments</label></h3>
+        <textarea id="commentPilot1" name="commentPilot1" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot2" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot2Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot2Rank"></h3>
+        </div>
+
+        <div>
+        <h3><label for="commentPilot2">Comments</label></h3>
+        <textarea id="commentPilot2" name="commentPilot2" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot3" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot3Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot3Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot3">Comments</label></h3>
+        <textarea id="commentPilot3" name="commentPilot3" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot4" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot4Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot4Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot4">Comments</label></h3>
+        <textarea id="commentPilot4" name="commentPilot4" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot5" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot5Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot5Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot5">Comments</label></h3>
+        <textarea id="commentPilot5" name="commentPilot5" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot6" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot6Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot6Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot6">Comments</label></h3>
+        <textarea id="commentPilot6" name="commentPilot6" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot7" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot7Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot7Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot7">Comments</label></h3>
+        <textarea id="commentPilot7" name="commentPilot7" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot8" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot8Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot8Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot8">Comments</label></h3>
+        <textarea id="commentPilot8" name="commentPilot8" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot9" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot9Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot9Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot9">Comments</label></h3>
+        <textarea id="commentPilot9" name="commentPilot9" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <div id="pilot10" class="tabcontent">
+      <h2>Details for:</h2>
+        <div style="display: flex; align-items: baseline; gap: 30px;">
+          <h1 id="pilot10Name" style="color: blue;"></h1>
+          <h3>|</h3>
+          <h3 id="pilot10Rank"></h3>
+        </div> 
+
+        <div>
+        <h3><label for="commentPilot10">Comments</label></h3>
+        <textarea id="commentPilot10" name="commentPilot10" rows="6" cols="80" placeholder="Enter your comments....."></textarea>
+        </div>
+    </div>
+
+    <!-------------hier liegen die Detail und Company Tabellen. Erstellt von js---------->
+    <!--hier liegen beide: Detail & Task-->
+    <div id="pilotDetailsContainer"></div>
+    
+    <!--dieser container ist gerade leer-->
+    <div id="pilotCompanyContainer"></div> 
+
+    <!-- Setup --> 
+      <div id="setup" class="tabcontent">
+        <h1>General Setup</h1>
+
+        <table id="adminTable">
+          <tr>
+            <th colspan="2" class="headTable">Admin</th>
+          </tr> 
+          <tr>
+            <td>Name</td>
+            <td contenteditable="true" id="adminTable0" class="green"></td>
+          </tr>
+          <tr>
+            <td>Mobil-No.:</td>
+            <td contenteditable="true" id="adminTable1" class="green"></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td contenteditable="true" id="adminTable2" class="green"></td>
+          </tr>
+        </table>
+
+
+        <div class="flexbox">   
+          <div>
+            <table id="editableTablePilotList">
+              <tr id="firstRowPilotList">
+                <th>Pilot #</th>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Notification Email</th>
+              </tr>
+              <tr>
+                <td>Pilot 1</td>
+                <td contenteditable="true" class="green" id="pilotName0"></td>
+                <td contenteditable="true" class="grey" id="rankPilot0"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot0"></td>
+              </tr>
+              <tr>
+                <td>Pilot 2</td>
+                <td contenteditable="true" class="green" id="pilotName1"></td>
+                <td contenteditable="true" class="grey" id="rankPilot1"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot1"></td>
+              </tr>
+              <tr>
+                <td>Pilot 3</td>
+                <td contenteditable="true" class="green" id="pilotName2"></td>
+                <td contenteditable="true" class="grey" id="rankPilot2"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot2"></td>
+              </tr>
+              <tr>
+                <td>Pilot 4</td>
+                <td contenteditable="true" class="green" id="pilotName3"></td>
+                <td contenteditable="true" class="grey" id="rankPilot3"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot3"></td>
+              </tr>
+              <tr>
+                <td>Pilot 5</td>
+                <td contenteditable="true" class="green" id="pilotName4"></td>
+                <td contenteditable="true" class="grey" id="rankPilot4"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot4"></td>
+              </tr>
+              <tr>
+                <td>Pilot 6</td>
+                <td contenteditable="true" class="green" id="pilotName5"></td>
+                <td contenteditable="true" class="grey" id="rankPilot5"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot5"></td>
+              </tr>
+              <tr>
+                <td>Pilot 7</td>
+                <td contenteditable="true" class="green" id="pilotName6"></td>
+                <td contenteditable="true" class="grey" id="rankPilot6"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot6"></td>
+              </tr>
+              <tr>
+                <td>Pilot 8</td>
+                <td contenteditable="true" class="green" id="pilotName7"></td>
+                <td contenteditable="true" class="grey" id="rankPilot7"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot7"></td>
+              </tr>
+              <tr>
+                <td>Pilot 9</td>
+                <td contenteditable="true" class="green" id="pilotName8"></td>
+                <td contenteditable="true" class="grey" id="rankPilot8"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot8"></td>
+              </tr>
+              <tr>
+                <td>Pilot 10</td>
+                <td contenteditable="true" class="green" id="pilotName9"></td>
+                <td contenteditable="true" class="grey" id="rankPilot9"></td>
+                <td contenteditable="true" class="grey" id="notifyEmailPilot9"></td>
+              </tr>
+            </table>
+          </div>
+        
+
+          <div>
+            <p>Fix-Detail-Items <br>(valid for every Pilot)</p>
+            <table id="fixTablePilotDetails">
+              <tr id="firstRowPilotDetails">
+                <th class="headTable">Fix-Info-Items</th>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem0"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem1"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem2"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem3"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem4"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem5"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem6"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedDetailedItem7"></td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <p>Fix-Initial-Task-Items <br>(valid for every Pilot)</p>
+            <table id="fixTablePilotInitialTask">
+              <tr id="firstRowPilotInitialTask">
+                <th class="headTable">Fix-Initial-Task-Items</th>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem0"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem1"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem2"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem3"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem4"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem5"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem6"></td>
+              </tr>
+              <tr>
+                <td contenteditable="true" class="orange" id="fixedInitialTaskItem7"></td>
+              </tr>
+            </table>
+          </div>
+        </div> 
+      </div>
+
+
+
+    <!--
+      <button onclick="saveTrackerData()">💾 Speichern</button>
+      <button onclick="loadTrackerData()">📂 Laden</button>
+-->
+      <div id="pilotNames"></div>
+      <div id="pilotRank"></div>
+      <div id="pilotEmail"></div>
+      <div id="pilotDetail"></div>
+      <div id="pilotTask"></div>
+      <div id="pilotAdmin"></div>
+      <div id="pilotComment"></div>
+    
+
+
 
   <script type="module" src="./main.js"></script>
 </body>
