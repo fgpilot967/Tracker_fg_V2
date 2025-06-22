@@ -53,6 +53,7 @@ export async function loadTrackerData() {
   names.textContent = result.pilotNames.join(", ");
   rank.textContent = result.pilotRank.join(", ");
   email.textContent = result.notifyEmailPilots.join(", ");
+  // email.textContent = (result.notifyEmailPilots || []).join(", ");    // Verhindert Fehler, selbst wenn undefined !! 
   detail.textContent = result.fixedDetailItems.join(", ");
   task.textContent = result.fixedTaskItems.join(", ");
   admin.textContent = result.adminTableArray.join(", ");

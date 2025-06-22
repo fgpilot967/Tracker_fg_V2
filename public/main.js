@@ -13,6 +13,7 @@ const numberOfFixTask = 8;
 import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
+import { calculateRow } from './modules/calculations.js';
 
 window.saveTrackerData = saveTrackerData;
 window.loadTrackerData = loadTrackerData;
@@ -42,11 +43,30 @@ window.addEventListener("DOMContentLoaded", () => {
       subWrapper.style.alignItems = "flex-start";
       subWrapper.style.gap = "300px";
       subWrapper.appendChild(createPilotDetailTable(pilot, numberOfRowsDetail, numberOfFixItems));
-      subWrapper.appendChild(createPilotCompanyTable(pilot, numberOfRowsTask, numberOfFixItems));
+      subWrapper.appendChild(createPilotCompanyTable(pilot, numberOfRowsTask, numberOfFixTask));
       wrapper.appendChild(subWrapper);
       detailContainer.appendChild(wrapper); 
     };
-
 });
 
+//------------------🔁 Live-Berechnungen aktivieren ------------------//
+setTimeout(() => {
+  for (let p = 1; p <= numberOfPilots; p++) {
+  setupLiveCalculation(p, numberOfRowsPilots);
+}}, 100);
+
+
+function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
+  for (let row = 1; row <= numberOfRowsPilots; row++) {
+    const input = document.getElementById(`lastCheckLiLane${row}Pilot${pilotNumber}`);
+    if (input) {
+      input.addEventListener("change", () => calculateRow(pilotNumber, row));
+    }
+
+    const validityCell = document.getElementById(`validityLiLane${row}Pilot${pilotNumber}`);
+    if (validityCell) {
+      validityCell.addEventListener("blur", () => calculateRow(pilotNumber, row));
+    }
+  }
+}
 
