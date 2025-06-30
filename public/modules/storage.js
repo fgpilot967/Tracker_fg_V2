@@ -1,15 +1,16 @@
 // storage.js (public/modules)
 
-import {user} from './arrays.js'
+import { updatePilotParagraph, user } from './arrays.js'
 
 import {
   pilotNames,
   pilotRank,
   notifyEmailPilots,
-  fixedDetailItems,
-  fixedTaskItems,
   adminTableArray,
-  pilotComments
+
+  //fixedDetailItems,
+  //fixedTaskItems,
+  //pilotComments,
 } from './arrays.js';
 
 
@@ -18,12 +19,15 @@ export async function saveTrackerData() {
     pilotNames,
     pilotRank,
     notifyEmailPilots,
-    fixedDetailItems,
-    fixedTaskItems,
     adminTableArray,
-    pilotComments
+
+    //fixedDetailItems,
+    //fixedTaskItems,
+    //pilotComments
+
     // Hier kannst du später weitere Arrays ergänzen
   };
+console.log("zu sendende Daten", data);
 
   const response = await fetch("https://tracker.fgienau.de/save", {
     method: "POST",
@@ -42,23 +46,28 @@ export async function loadTrackerData() {
   const result = await response.json();
   console.log("📦 Geladen:", result);
 
-  // Beispielhafte Anzeige
-  const names = document.getElementById("pilotNames");
-  const rank = document.getElementById("pilotRank");
-  const email = document.getElementById("pilotEmail");
-  const detail = document.getElementById("pilotDetail");
-  const task = document.getElementById("pilotTask");
-  const admin = document.getElementById("pilotAdmin");
-  const comment = document.getElementById("pilotComment");
-  names.textContent = result.pilotNames.join(", ");
-  rank.textContent = result.pilotRank.join(", ");
-  email.textContent = result.notifyEmailPilots.join(", ");
-  // email.textContent = (result.notifyEmailPilots || []).join(", ");    // Verhindert Fehler, selbst wenn undefined !! 
-  detail.textContent = result.fixedDetailItems.join(", ");
-  task.textContent = result.fixedTaskItems.join(", ");
-  admin.textContent = result.adminTableArray.join(", ");
-  comment.textContent = result.pilotComments.join(", ");
+  pilotNames.length = 0; // leert das vorhandene Array
+  pilotNames.push(...(result.pilotNames || []));
 
+  // Zurück in Zellen schreiben
+  result.pilotNames?.forEach((name, i) => {
+    const cell = document.getElementById(`pilotName${i}`);
+    if (cell) cell.textContent = name;
+  });
+
+  result.pilotRank?.forEach((rank, i) => {
+    const cell = document.getElementById(`rankPilot${i}`);
+    if (cell) cell.textContent = rank;
+  });
+
+  result.notifyEmailPilots?.forEach((email, i) => {
+    const cell = document.getElementById(`notifyEmailPilot${i}`);
+    if (cell) cell.textContent = email;
+  });
+  updatePilotParagraph();
 }
+
+
+
 
 

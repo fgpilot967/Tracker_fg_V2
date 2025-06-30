@@ -14,12 +14,39 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail } from './modules/arrays.js';
+
+
+//------------------🧠 Initialisierungs-Sicherung ------------------//
+setTimeout(() => {
+  updateArrayPilotNames(numberOfPilots);
+  updateArrayPilotRank(numberOfPilots);
+  updateArrayNotifyEmail(numberOfPilots);
+  //saveTrackerData();
+  //loadTrackerData();
+  //loadAllPilotTablesWithData();
+  //loadAllPilotDetailsTablesWithData();
+  //updateAllPilots(numberOfPilots, numberOfRowsPilots);
+  //attachSaveTriggers();
+  //updatePilotHeadlines();
+  //updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
+  //updateArrayFixTask(numberOfFixTask, numberOfPilots);
+  //updateArrayPilotComments(numberOfPilots);
+  //updateAdminTable();
+  
+}, 500);
+
+
+
 
 window.saveTrackerData = saveTrackerData;
 window.loadTrackerData = loadTrackerData;
 window.updatePilotDropdownFromTable = updatePilotDropdownFromTable;
 window.openTab = openTab;
+window.pilotNames = pilotNames;
+window.pilotRank = pilotRank;
+window.notifyEmailPilots = notifyEmailPilots;
+
 
 //------------------🧱 DOM Aufbau ------------------//
 window.addEventListener("DOMContentLoaded", () => {
@@ -71,16 +98,4 @@ function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
   }
 }
 
-//-----------------Update der Piloten-Tabellen Headline-Anzeige-----------------------------
-
-function updatePilotHeadlines() {
-  console.log("Headlines aktualisiert");
-  for (let i = 0; i < pilotNames.length; i++) {
-    const headline = document.getElementById(`headPilot${i + 1}`);
-    if (headline) {
-      const spacer = "\u2003"; // EM SPACE
-      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
-    }
-  }
-}
 

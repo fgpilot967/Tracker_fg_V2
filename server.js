@@ -37,11 +37,12 @@ app.post("/save", (req, res) => {
   try {
     fs.writeFileSync(path.join(userDir, "pilotNames.json"), JSON.stringify(data.pilotNames));
     fs.writeFileSync(path.join(userDir, "pilotRank.json"), JSON.stringify(data.pilotRank));
-    fs.writeFileSync(path.join(userDir, "pilotComments.json"), JSON.stringify(data.pilotComments));
-    fs.writeFileSync(path.join(userDir, "fixedDetailItems.json"), JSON.stringify(data.fixedDetailItems));
-    fs.writeFileSync(path.join(userDir, "fixedTaskItems.json"), JSON.stringify(data.fixedTaskItems));
-    fs.writeFileSync(path.join(userDir, "adminTableArray.json"), JSON.stringify(data.adminTableArray));
     fs.writeFileSync(path.join(userDir, "notifyEmailPilots.json"), JSON.stringify(data.notifyEmailPilots));
+    fs.writeFileSync(path.join(userDir, "adminTableArray.json"), JSON.stringify(data.adminTableArray));
+
+    //fs.writeFileSync(path.join(userDir, "pilotComments.json"), JSON.stringify(data.pilotComments));
+    //fs.writeFileSync(path.join(userDir, "fixedDetailItems.json"), JSON.stringify(data.fixedDetailItems));
+    //fs.writeFileSync(path.join(userDir, "fixedTaskItems.json"), JSON.stringify(data.fixedTaskItems));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
     console.log(`✅ Daten für ${user} gespeichert.`);
@@ -74,11 +75,12 @@ app.get("/load/:user", (req, res) => {
   const result = {
     pilotNames: loadJsonSafely(path.join(userDir, "pilotNames.json")),
     pilotRank: loadJsonSafely(path.join(userDir, "pilotRank.json")),
-    pilotComments: loadJsonSafely(path.join(userDir, "pilotComments.json")),
-    fixedDetailItems: loadJsonSafely(path.join(userDir, "fixedDetailItems.json")),
-    fixedTaskItems: loadJsonSafely(path.join(userDir, "fixedTaskItems.json")),
-    adminTableArray: loadJsonSafely(path.join(userDir, "adminTableArray.json")),
     notifyEmailPilots: loadJsonSafely(path.join(userDir, "notifyEmailPilots.json")),
+    adminTableArray: loadJsonSafely(path.join(userDir, "adminTableArray.json")),
+
+    //pilotComments: loadJsonSafely(path.join(userDir, "pilotComments.json")),
+    //fixedDetailItems: loadJsonSafely(path.join(userDir, "fixedDetailItems.json")),
+    //fixedTaskItems: loadJsonSafely(path.join(userDir, "fixedTaskItems.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
   };

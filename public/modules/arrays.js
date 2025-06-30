@@ -2,14 +2,118 @@
 
 // modules/arrays.js
 
+
+
 export const user = "fgpilot";          // Benutzer; später als Variable
 
-export let pilotNames = ["frank", "peter"];             // z. B. ["Max", "Susi"]
-export let pilotRank = ["captain", "instructor"];              // z. B. ["CPT", "FO"]
-export let notifyEmailPilots = ["email1", "email2"];      // z. B. ["max@mail.com", "susi@mail.com"]
-export let fixedDetailItems = ["detail1", "detail2"];       // z. B. ["Medical valid", "Line Check"]
-export let fixedTaskItems = ["fix1", "fix2"];         // z. B. ["Sim geplant", "DGR refresher"]
-export let adminTableArray = ["admin1", "admin2", "emailAdmin"];        // z. B. ["Status A", "Status B"]
-export let pilotComments = ["com1", "com2"];          // z. B. ["gut geflogen", "hat sich verbessert"]
+
+export let pilotNames = [];   
+export let pilotRank = [];  
+export let notifyEmailPilots = [];  
+export let adminTableArray = [];    
+
+//export let fixedDetailItems = ["detail1", "detail2"]; 
+//export let fixedTaskItems = ["fix1", "fix2"];         
+//export let pilotComments = ["com1", "com2"];  
+
+
+//-------------------Pilot Names (Array & DOM)---------------------------
+
+
+export function updateArrayPilotNames(numberOfPilots) {
+  //pilotNames = [];
+  
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`pilotName${i}`);
+
+    // Event nur einmal hinzufügen
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        pilotNames[i] = cell.textContent.trim();
+        for (let p = 1; p <= numberOfPilots; p++) {
+          updatePilotParagraph(p);
+        }
+        console.log("pilotNames Array aktualisiert:", pilotNames);
+        updatePilotHeadlines();
+      });
+      cell.dataset.listenerAdded = "true"; 
+    }
+  }  
+  updatePilotParagraph(); 
+}
+
+export function updatePilotParagraph() {
+  console.log("Paragraph aktualisiert");
+  for (let i = 0; i < pilotNames.length; i++) {
+    const p = document.getElementById(`pilot${i + 1}Name`);
+    if (p) p.textContent = pilotNames[i];
+  }
+}
+
+
+//-----------------Update der Piloten-Tabellen Headline-Anzeige-----------------------------
+
+export function updatePilotHeadlines() {
+  
+  for (let i = 0; i < pilotNames.length; i++) {
+    const headline = document.getElementById(`headPilot${i + 1}`);
+    if (headline) {
+      const spacer = "\u2003"; // EM SPACE
+      headline.textContent = pilotNames[i] + spacer + "|" + spacer + pilotRank[i];
+    }
+  }
+  console.log("Headlines aktualisiert");
+}
+
+
+//-------------------Pilot Rank (Array & DOM)---------------------------
+
+
+export function updateArrayPilotRank(numberOfPilots) {
+  pilotRank = [];
+  
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`rankPilot${i}`);
+
+    // Event nur einmal hinzufügen
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        pilotRank[i] = cell.textContent.trim();
+        
+        for (let p = 1; p <= numberOfPilots; p++) {
+          updatePilotParagraphRank(p);
+        }
+        console.log("pilotRank Array aktualisiert:", pilotRank);
+        updatePilotHeadlines();
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }
+  updatePilotParagraphRank();
+}
+
+export function updatePilotParagraphRank() {
+  console.log("Rank aktualisiert");
+  for (let i = 0; i < pilotRank.length; i++) {
+    const pRank = document.getElementById(`pilot${i + 1}Rank`);
+    if (pRank) pRank.textContent = pilotRank[i];
+  }
+}
+
+
+//-------------------Pilot Email (Array & DOM)---------------------------
+
+export function updateArrayNotifyEmail(numberOfPilots) {
+  notifyEmailPilots = [];
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`notifyEmailPilot${i}`);
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        notifyEmailPilots[i] = cell.textContent.trim();
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }
+}
 
 
