@@ -2,6 +2,7 @@
 
 // modules/arrays.js
 
+import { numberOfPilots } from '../main.js';
 
 
 export const user = "fgpilot";          // Benutzer; später als Variable
@@ -12,10 +13,7 @@ export let pilotRank = [];
 export let notifyEmailPilots = [];  
 export let adminTableArray = [];  
 export let fixedDetailItems = [];
-
-
-//export let fixedDetailItems = ["detail1", "detail2"]; 
-//export let fixedTaskItems = ["fix1", "fix2"];         
+export let fixedTaskItems = [];         
 //export let pilotComments = ["com1", "com2"];  
 
 
@@ -115,7 +113,7 @@ export function updateFixDetailTableArray(numberOfFixItems) {
       cell.addEventListener("blur", () => {
         fixedDetailItems[i] = cell.textContent.trim();
         //for (let p = 1; p <= numberOfPilots; p++) {
-        insertFixedDetailItems();
+        insertFixedDetailItems(numberOfPilots);
         //}
         console.log("Fix Detail Array aktualisiert:", fixedDetailItems);
       });
@@ -136,6 +134,37 @@ export function insertFixedDetailItems(numberOfPilots) {
   }
 }
 
+//-------------------Fix Task Items (Array & DOM & Insert to Pilot)---------------------------
+
+export function updateFixTaskTableArray(numberOfFixTask) {
+  //fixedTaskItems = [];
+
+  for (let i = 0; i < numberOfFixTask; i++) {
+    const cell = document.getElementById(`fixedInitialTaskItem${i}`);
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        fixedTaskItems[i] = cell.textContent.trim();
+        //for (let p = 1; p <= numberOfPilots; p++) {
+        insertFixedTaskItems(numberOfPilots);
+        //}
+        console.log("Fix Task Array aktualisiert:", fixedTaskItems);
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }
+}
+
+export function insertFixedTaskItems(numberOfPilots) {
+  for (let i = 0; i < fixedTaskItems.length; i++) {
+    for (let p = 1; p <= numberOfPilots; p++) {
+      const cellId = `itemCompanyLane${i + 1}Pilot${p}`;
+      const cell = document.getElementById(cellId);
+      if (cell) {
+        cell.textContent = fixedTaskItems[i];
+      }
+    }
+  }
+}
 
 
 //============================== updates der Header ====================================

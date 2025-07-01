@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user } from './arrays.js'
 
 import { numberOfPilots } from '../main.js';
 
@@ -10,9 +10,10 @@ import {
   notifyEmailPilots,
   adminTableArray,
   fixedDetailItems,
-  //fixedTaskItems,
+  fixedTaskItems,
   //pilotComments,
 } from './arrays.js';
+
 
 
 export async function saveTrackerData() {
@@ -22,7 +23,7 @@ export async function saveTrackerData() {
     notifyEmailPilots,
     adminTableArray,
     fixedDetailItems,
-    //fixedTaskItems,
+    fixedTaskItems,
     //pilotComments
 
     // Hier kannst du später weitere Arrays ergänzen
@@ -63,6 +64,9 @@ export async function loadTrackerData() {
   fixedDetailItems.length = 0;
   fixedDetailItems.push(...(result.fixedDetailItems || []));
 
+  fixedTaskItems.length = 0;
+  fixedTaskItems.push(...(result.fixedTaskItems || []));
+
 
   // Zurück in Zellen schreiben
   result.pilotNames?.forEach((name, i) => {
@@ -90,11 +94,17 @@ export async function loadTrackerData() {
     if (cell) cell.textContent = fixItem;
   });
 
+  result.fixedTaskItems?.forEach((fixTask, i) => {
+    const cell = document.getElementById(`fixedInitialTaskItem${i}`);
+    if (cell) cell.textContent = fixTask;
+  })
+
 
   updatePilotParagraph();
   updatePilotHeadlines();
   updatePilotParagraphRank();
   insertFixedDetailItems(numberOfPilots);
+  insertFixedTaskItems(numberOfPilots);
 };
 
 

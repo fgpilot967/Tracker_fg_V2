@@ -14,7 +14,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -24,6 +24,7 @@ setTimeout(() => {
   updateArrayNotifyEmail(numberOfPilots);
   updateArrayAdminTable();
   updateFixDetailTableArray(numberOfFixItems);
+  updateFixTaskTableArray(numberOfFixTask);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -33,7 +34,6 @@ setTimeout(() => {
   //attachSaveTriggers();
   //updatePilotHeadlines();
   //updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
-  //updateArrayFixTask(numberOfFixTask, numberOfPilots);
   //updateArrayPilotComments(numberOfPilots);
   
 }, 500);
