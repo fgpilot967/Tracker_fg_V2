@@ -1,8 +1,8 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems } from './arrays.js'
 
-import { numberOfPilots } from '../main.js';
+import { numberOfPilots, numberOfTasks } from '../main.js';
 
 import {
   pilotNames,
@@ -24,7 +24,8 @@ export async function saveTrackerData() {
     adminTableArray,
     fixedDetailItems,
     fixedTaskItems,
-    pilotComments
+    pilotComments,
+    dataInitialTaskItems
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -108,12 +109,41 @@ export async function loadTrackerData() {
   });
 
 
+  // DAS OBJEKT dataInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+  Object.keys(dataInitialTaskItems).forEach(key => delete dataInitialTaskItems[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.dataInitialTaskItems && typeof result.dataInitialTaskItems === "object" && !Array.isArray(result.dataInitialTaskItems)) {
+    Object.assign(dataInitialTaskItems, result.dataInitialTaskItems);
+    console.log("✅ dataInitialTaskItems korrekt geladen:", dataInitialTaskItems);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für dataInitialTaskItems:", result.dataInitialTaskItems);
+  }
+
+
+  for (let pilotId in dataInitialTaskItems) {
+  const taskArray = dataInitialTaskItems[pilotId];
+
+  // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+  const pilotNum = pilotId.replace("pilot", "");
+
+  taskArray.forEach((value, rowIndex) => {
+    const cell = document.getElementById(`itemCompanyLane${rowIndex}Pilot${pilotNum}`);
+    if (cell) {
+      cell.textContent = value;
+    }
+  });
+}
+
+
+
   updatePilotParagraph();
   updatePilotHeadlines();
   updatePilotParagraphRank();
   insertFixedDetailItems(numberOfPilots);
   insertFixedTaskItems(numberOfPilots);
   updateArrayPilotComments(numberOfPilots);
+  updateArrayTaskItems(numberOfTasks, numberOfPilots);
 };
 
 

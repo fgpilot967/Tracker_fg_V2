@@ -8,13 +8,14 @@ const numberOfRowsDetail = 15;
 const numberOfRowsTask = 15;
 const numberOfFixItems = 8;
 const numberOfFixTask = 8;
+export const numberOfTasks = 16;
 
 
 import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -26,6 +27,7 @@ setTimeout(() => {
   updateFixDetailTableArray(numberOfFixItems);
   updateFixTaskTableArray(numberOfFixTask);
   updateArrayPilotComments(numberOfPilots);
+  updateArrayTaskItems(numberOfTasks, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -49,6 +51,7 @@ window.pilotNames = pilotNames;
 window.pilotRank = pilotRank;
 window.notifyEmailPilots = notifyEmailPilots;
 window.adminTableArray = adminTableArray;
+window.dataInitialTaskItems = dataInitialTaskItems;
 
 
 //------------------🧱 DOM Aufbau ------------------//

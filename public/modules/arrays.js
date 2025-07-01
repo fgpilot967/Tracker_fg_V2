@@ -15,6 +15,9 @@ export let adminTableArray = [];
 export let fixedDetailItems = [];
 export let fixedTaskItems = [];         
 export let pilotComments = [];  
+export let dataInitialTaskItems = {}; // das ist ein Objekt
+//export let initialTaskDate = [];
+//export let initialTaskBox = [];
 
 
 //-------------------Pilot Names (Array & DOM)---------------------------
@@ -143,10 +146,8 @@ export function updateFixTaskTableArray(numberOfFixTask) {
     const cell = document.getElementById(`fixedInitialTaskItem${i}`);
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("blur", () => {
-        fixedTaskItems[i] = cell.textContent.trim();
-        //for (let p = 1; p <= numberOfPilots; p++) {
+        fixedTaskItems[i] = cell.textContent.trim(); 
         insertFixedTaskItems(numberOfPilots);
-        //}
         console.log("Fix Task Array aktualisiert:", fixedTaskItems);
       });
       cell.dataset.listenerAdded = "true";
@@ -165,6 +166,34 @@ export function insertFixedTaskItems(numberOfPilots) {
     }
   }
 }
+
+
+//------------------- Task Items (freie Felder; Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayTaskItems(numberOfTasks, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!dataInitialTaskItems[`pilot${p}`]) {
+      dataInitialTaskItems[`pilot${p}`] = [];
+    }
+  
+    for (let i = 8; i < numberOfTasks; i++) {
+      const cell = document.getElementById(`itemCompanyLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          dataInitialTaskItems[`pilot${p}`][i] = cell.textContent.trim();
+          console.log(`Pilot ${p} - Task Array ab Reihe 9:`, dataInitialTaskItems[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+
+
 
 
 //-------------------Pilot Comments (Array & DOM )---------------------------
