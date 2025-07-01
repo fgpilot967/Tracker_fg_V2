@@ -43,6 +43,7 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "fixedTaskItems.json"), JSON.stringify(data.fixedTaskItems));
     fs.writeFileSync(path.join(userDir, "pilotComments.json"), JSON.stringify(data.pilotComments));
     fs.writeFileSync(path.join(userDir, "dataInitialTaskItems.json"), JSON.stringify(data.dataInitialTaskItems));
+    fs.writeFileSync(path.join(userDir, "dateInitialTaskItems.json"), JSON.stringify(data.dateInitialTaskItems));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
     console.log(`✅ Daten für ${user} gespeichert.`);
@@ -81,6 +82,7 @@ app.get("/load/:user", (req, res) => {
     fixedTaskItems: loadJsonSafely(path.join(userDir, "fixedTaskItems.json")),
     pilotComments: loadJsonSafely(path.join(userDir, "pilotComments.json")),
     dataInitialTaskItems: loadJsonSafely(path.join(userDir, "dataInitialTaskItems.json")),
+    dateInitialTaskItems: loadJsonSafely(path.join(userDir, "dateInitialTaskItems.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
   };

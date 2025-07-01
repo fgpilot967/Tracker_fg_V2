@@ -16,6 +16,7 @@ export let fixedDetailItems = [];
 export let fixedTaskItems = [];         
 export let pilotComments = [];  
 export let dataInitialTaskItems = {}; // das ist ein Objekt
+export let dateInitialTaskItems = {};
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
 
@@ -190,6 +191,32 @@ export function updateArrayTaskItems(numberOfTasks, numberOfPilots) {
     }
   }
 }
+
+
+//------------------- Task Date (Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayTaskDate(numberOfTasks, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!dateInitialTaskItems[`pilot${p}`]) {
+      dateInitialTaskItems[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfTasks + 1; i++) {
+      const cell = document.getElementById(`dateCompanyLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          dateInitialTaskItems[`pilot${p}`][i] = cell.value.trim();
+          console.log(`Pilot ${p} - Task Date Objekt:`, dateInitialTaskItems[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
 
 
 

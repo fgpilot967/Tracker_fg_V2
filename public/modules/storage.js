@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks } from '../main.js';
 
@@ -25,7 +25,8 @@ export async function saveTrackerData() {
     fixedDetailItems,
     fixedTaskItems,
     pilotComments,
-    dataInitialTaskItems
+    dataInitialTaskItems,
+    dateInitialTaskItems,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -109,7 +110,8 @@ export async function loadTrackerData() {
   });
 
 
-  // DAS OBJEKT dataInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+  // DAS OBJEKT ITEM dataInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+
   Object.keys(dataInitialTaskItems).forEach(key => delete dataInitialTaskItems[key]);
 
   // Übernimm die geladenen Daten (falls es ein Objekt ist)
@@ -120,20 +122,51 @@ export async function loadTrackerData() {
     console.warn("⚠️ Unerwartetes Format für dataInitialTaskItems:", result.dataInitialTaskItems);
   }
 
-
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
   for (let pilotId in dataInitialTaskItems) {
-  const taskArray = dataInitialTaskItems[pilotId];
+    const taskArray = dataInitialTaskItems[pilotId];
 
-  // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
-  const pilotNum = pilotId.replace("pilot", "");
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`itemCompanyLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
 
-  taskArray.forEach((value, rowIndex) => {
-    const cell = document.getElementById(`itemCompanyLane${rowIndex}Pilot${pilotNum}`);
-    if (cell) {
-      cell.textContent = value;
-    }
-  });
-}
+
+// DAS OBJEKT DATE dateInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(dateInitialTaskItems).forEach(key => delete dateInitialTaskItems[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.dateInitialTaskItems && typeof result.dateInitialTaskItems === "object" && !Array.isArray(result.dateInitialTaskItems)) {
+    Object.assign(dateInitialTaskItems, result.dateInitialTaskItems);
+    console.log("✅ dateInitialTaskItems korrekt geladen:", dateInitialTaskItems);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für dateInitialTaskItems:", result.dateInitialTaskItems);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in dateInitialTaskItems) {
+    const taskArray = dateInitialTaskItems[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`dateCompanyLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.value = value;
+      }
+    });
+  }
+
+
+
+
+
 
 
 
