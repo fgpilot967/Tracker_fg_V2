@@ -2,7 +2,7 @@
 console.log("main.js geladen");
 
 //------------------🔧 Globale Konstanten ------------------//
-const numberOfPilots = 10;
+export const numberOfPilots = 10;
 const numberOfRowsPilots = 15;
 const numberOfRowsDetail = 15;
 const numberOfRowsTask = 15;
@@ -14,7 +14,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -22,6 +22,9 @@ setTimeout(() => {
   updateArrayPilotNames(numberOfPilots);
   updateArrayPilotRank(numberOfPilots);
   updateArrayNotifyEmail(numberOfPilots);
+  updateArrayAdminTable();
+  updateFixDetailTableArray(numberOfFixItems);
+
   //saveTrackerData();
   //loadTrackerData();
   //loadAllPilotTablesWithData();
@@ -32,7 +35,6 @@ setTimeout(() => {
   //updateDetailArrayFromIds(numberOfFixItems, numberOfPilots);
   //updateArrayFixTask(numberOfFixTask, numberOfPilots);
   //updateArrayPilotComments(numberOfPilots);
-  //updateAdminTable();
   
 }, 500);
 
@@ -46,6 +48,7 @@ window.openTab = openTab;
 window.pilotNames = pilotNames;
 window.pilotRank = pilotRank;
 window.notifyEmailPilots = notifyEmailPilots;
+window.adminTableArray = adminTableArray;
 
 
 //------------------🧱 DOM Aufbau ------------------//

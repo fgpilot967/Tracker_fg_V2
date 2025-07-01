@@ -1,14 +1,15 @@
 // storage.js (public/modules)
 
-import { updatePilotParagraph, user } from './arrays.js'
+import { insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user } from './arrays.js'
+
+import { numberOfPilots } from '../main.js';
 
 import {
   pilotNames,
   pilotRank,
   notifyEmailPilots,
   adminTableArray,
-
-  //fixedDetailItems,
+  fixedDetailItems,
   //fixedTaskItems,
   //pilotComments,
 } from './arrays.js';
@@ -20,8 +21,7 @@ export async function saveTrackerData() {
     pilotRank,
     notifyEmailPilots,
     adminTableArray,
-
-    //fixedDetailItems,
+    fixedDetailItems,
     //fixedTaskItems,
     //pilotComments
 
@@ -46,8 +46,23 @@ export async function loadTrackerData() {
   const result = await response.json();
   console.log("📦 Geladen:", result);
 
-  pilotNames.length = 0; // leert das vorhandene Array
+
+  // leert das vorhandene Array
+  pilotNames.length = 0; 
   pilotNames.push(...(result.pilotNames || []));
+
+  pilotRank.length = 0;
+  pilotRank.push(...(result.pilotRank || []));
+
+  notifyEmailPilots.length = 0;
+  notifyEmailPilots.push(...(result.notifyEmailPilots || []));
+
+  adminTableArray.length = 0;
+  adminTableArray.push(...(result.adminTableArray || []));
+
+  fixedDetailItems.length = 0;
+  fixedDetailItems.push(...(result.fixedDetailItems || []));
+
 
   // Zurück in Zellen schreiben
   result.pilotNames?.forEach((name, i) => {
@@ -64,8 +79,25 @@ export async function loadTrackerData() {
     const cell = document.getElementById(`notifyEmailPilot${i}`);
     if (cell) cell.textContent = email;
   });
+
+  result.adminTableArray?.forEach((admin, i) => {
+    const cell = document.getElementById(`adminTable${i}`);
+    if (cell) cell.textContent = admin;
+  });
+
+  result.fixedDetailItems?.forEach((fixItem, i) => {
+    const cell = document.getElementById(`fixedDetailItem${i}`);
+    if (cell) cell.textContent = fixItem;
+  });
+
+
   updatePilotParagraph();
-}
+  updatePilotHeadlines();
+  updatePilotParagraphRank();
+  insertFixedDetailItems(numberOfPilots);
+};
+
+
 
 
 
