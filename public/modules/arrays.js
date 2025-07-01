@@ -17,6 +17,7 @@ export let fixedTaskItems = [];
 export let pilotComments = [];  
 export let dataInitialTaskItems = {}; // das ist ein Objekt
 export let dateInitialTaskItems = {};
+export let boxInitialTaskItems = {};
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
 
@@ -202,7 +203,7 @@ export function updateArrayTaskDate(numberOfTasks, numberOfPilots) {
       dateInitialTaskItems[`pilot${p}`] = [];
     }
   
-    for (let i = 1; i < numberOfTasks + 1; i++) {
+    for (let i = 1; i < numberOfTasks; i++) {
       const cell = document.getElementById(`dateCompanyLane${i}Pilot${p}`);
       
       if (!cell.dataset.listenerAdded) {
@@ -217,7 +218,30 @@ export function updateArrayTaskDate(numberOfTasks, numberOfPilots) {
 }
 
 
+//------------------- Task Checkbox (Pilots Details) (Array & DOM )---------------------------
 
+export function updateArrayTaskBoxes(numberOfTasks, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!boxInitialTaskItems[`pilot${p}`]) {
+      boxInitialTaskItems[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfTasks; i++) {
+      const cell = document.getElementById(`itemCompanyPassedLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("change", () => {
+          
+            boxInitialTaskItems[`pilot${p}`][i] = cell.checked;
+      
+          console.log(`Pilot ${p} - Task Boxes Objekt:`, boxInitialTaskItems[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
 
 
 
