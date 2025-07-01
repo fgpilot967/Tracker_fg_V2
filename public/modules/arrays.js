@@ -14,7 +14,7 @@ export let notifyEmailPilots = [];
 export let adminTableArray = [];  
 export let fixedDetailItems = [];
 export let fixedTaskItems = [];         
-//export let pilotComments = ["com1", "com2"];  
+export let pilotComments = [];  
 
 
 //-------------------Pilot Names (Array & DOM)---------------------------
@@ -165,6 +165,25 @@ export function insertFixedTaskItems(numberOfPilots) {
     }
   }
 }
+
+
+//-------------------Pilot Comments (Array & DOM )---------------------------
+
+export function updateArrayPilotComments(numberOfPilots) {
+
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`commentPilot${i}`);
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        pilotComments[i] = cell.value.trim();
+        console.log("Pilot Comments Array aktualisiert", pilotComments);
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }  
+}
+
+
 
 
 //============================== updates der Header ====================================
