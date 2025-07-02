@@ -48,6 +48,7 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "dataInfoItems.json"), JSON.stringify(data.dataInfoItems));
     fs.writeFileSync(path.join(userDir, "detailInfoItems.json"), JSON.stringify(data.detailInfoItems));
     fs.writeFileSync(path.join(userDir, "inputPilotTable.json"), JSON.stringify(data.inputPilotTable));
+    fs.writeFileSync(path.join(userDir, "dateLiPilotTable.json"), JSON.stringify(data.dateLiPilotTable));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
 
@@ -92,6 +93,7 @@ app.get("/load/:user", (req, res) => {
     dataInfoItems: loadJsonSafely(path.join(userDir, "dataInfoItems.json")),
     detailInfoItems: loadJsonSafely(path.join(userDir, "detailInfoItems.json")),
     inputPilotTable: loadJsonSafely(path.join(userDir, "inputPilotTable.json")),
+    dateLiPilotTable: loadJsonSafely(path.join(userDir, "dateLiPilotTable.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
 

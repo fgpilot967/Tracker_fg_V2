@@ -21,6 +21,7 @@ export let boxInitialTaskItems = {};
 export let dataInfoItems = {};
 export let detailInfoItems = {};
 export let inputPilotTable = {};
+export let dateLiPilotTable = {};
 
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
@@ -333,6 +334,34 @@ export function updateArrayPilotComments(numberOfPilots) {
     }
   }  
 }
+
+
+//------------------- License Date (Pilots Tables) (Array & DOM )---------------------------
+
+export function updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!dateLiPilotTable[`pilot${p}`]) {
+      dateLiPilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`lastCheckLiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          dateLiPilotTable[`pilot${p}`][i] = cell.value.trim();
+          console.log(`Pilot ${p} - Last Check Date Objekt:`, dateLiPilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+  console.log("dateLiPilotTable durchlaufen");
+}
+
+
+
 
 
 

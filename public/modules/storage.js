@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks } from '../main.js';
 
@@ -31,6 +31,7 @@ export async function saveTrackerData() {
     dataInfoItems,
     detailInfoItems,
     inputPilotTable,
+    dateLiPilotTable,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -168,7 +169,7 @@ export async function loadTrackerData() {
   }
 
 
-// DAS OBJEKT BOXboxInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+// DAS OBJEKT BOX boxInitialTaskItem LADEN ---- Leere das Objekt zuerst!
 
   Object.keys(boxInitialTaskItems).forEach(key => delete boxInitialTaskItems[key]);
 
@@ -274,6 +275,33 @@ export async function loadTrackerData() {
       }
     });
   }
+
+// DAS OBJEKT License DATE dateLiPilotList LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(dateLiPilotTable).forEach(key => delete dateLiPilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.dateLiPilotTable && typeof result.dateLiPilotTable === "object" && !Array.isArray(result.dateLiPilotTable)) {
+    Object.assign(dateLiPilotTable, result.dateLiPilotTable);
+    console.log("✅ dateLiPilotTable korrekt geladen:", dateLiPilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für dateLiPilotTable:", result.dateLiPilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in dateLiPilotTable) {
+    const taskArray = dateLiPilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`lastCheckLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.value = value;
+      }
+    });
+  }
+
 
 
 

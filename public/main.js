@@ -15,7 +15,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable, updateArrayLicenseDate, dateLiPilotTable } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -33,6 +33,7 @@ setTimeout(() => {
   updateArrayInfoItems(numberOfTasks, numberOfPilots);
   updateArrayDetailItems(numberOfTasks, numberOfPilots);
   updateArrayInputPilotTable(numberOfRowsPilots, numberOfPilots);
+  updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -62,6 +63,7 @@ window.boxInitialTaskItems = boxInitialTaskItems;
 window.dataInfoItems = dataInfoItems;
 window.detailInfoItems = detailInfoItems;
 window.inputPilotTable = inputPilotTable;
+window.dateLiPilotTable = dateLiPilotTable;
 
 
 //------------------🧱 DOM Aufbau ------------------//
