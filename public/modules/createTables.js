@@ -26,7 +26,7 @@ export function createPilotTable(pilotNumber, numberOfRowsPilots) {
   for (let i = 1; i <= numberOfRowsPilots; i++) {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td contenteditable="true" class="green"></td>
+      <td contenteditable="true" class="green" id="inputLiLane${i}Pilot${pilotNumber}"></td>
       <td><input type="date" class="inputDate" id="lastCheckLiLane${i}Pilot${pilotNumber}"></td>
       <td contenteditable="true" class="inputValidity" id="validityLiLane${i}Pilot${pilotNumber}"></td>
       <td id="newExpiryDateLiLane${i}Pilot${pilotNumber}"></td>

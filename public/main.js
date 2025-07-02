@@ -3,7 +3,7 @@ console.log("main.js geladen");
 
 //------------------🔧 Globale Konstanten ------------------//
 export const numberOfPilots = 10;
-const numberOfRowsPilots = 15;
+export const numberOfRowsPilots = 15;
 const numberOfRowsDetail = 15;
 const numberOfRowsTask = 15;
 const numberOfFixItems = 8;
@@ -15,7 +15,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -32,6 +32,7 @@ setTimeout(() => {
   updateArrayTaskBoxes(numberOfTasks, numberOfPilots);
   updateArrayInfoItems(numberOfTasks, numberOfPilots);
   updateArrayDetailItems(numberOfTasks, numberOfPilots);
+  updateArrayInputPilotTable(numberOfRowsPilots, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -60,6 +61,7 @@ window.dateInitialTaskItems = dateInitialTaskItems;
 window.boxInitialTaskItems = boxInitialTaskItems;
 window.dataInfoItems = dataInfoItems;
 window.detailInfoItems = detailInfoItems;
+window.inputPilotTable = inputPilotTable;
 
 
 //------------------🧱 DOM Aufbau ------------------//

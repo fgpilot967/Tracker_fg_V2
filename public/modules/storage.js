@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks } from '../main.js';
 
@@ -30,6 +30,7 @@ export async function saveTrackerData() {
     boxInitialTaskItems,
     dataInfoItems,
     detailInfoItems,
+    inputPilotTable,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -247,6 +248,32 @@ export async function loadTrackerData() {
     });
   }
 
+
+// DAS OBJEKT Input License (ganze Spalte) inputPilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(inputPilotTable).forEach(key => delete inputPilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.inputPilotTable && typeof result.inputPilotTable === "object" && !Array.isArray(result.inputPilotTable)) {
+    Object.assign(inputPilotTable, result.inputPilotTable);
+    console.log("✅ inputPilotTable korrekt geladen:", inputPilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für inputPilotTable:", result.inputPilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in inputPilotTable) {
+    const taskArray = inputPilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`inputLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
 
 
 

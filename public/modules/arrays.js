@@ -20,6 +20,7 @@ export let dateInitialTaskItems = {};
 export let boxInitialTaskItems = {};
 export let dataInfoItems = {};
 export let detailInfoItems = {};
+export let inputPilotTable = {};
 
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
@@ -290,6 +291,29 @@ export function updateArrayDetailItems(numberOfTasks, numberOfPilots) {
   }
 }
 
+
+//-------------Pilot Table License Items ; ganze Spalte  (Array & DOM )---------------------------
+
+export function updateArrayInputPilotTable(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!inputPilotTable[`pilot${p}`]) {
+      inputPilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`inputLiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          inputPilotTable[`pilot${p}`][i] = cell.textContent.trim();
+          console.log(`Pilot ${p} - License Object aktualisiert:`, inputPilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
 
 
 
