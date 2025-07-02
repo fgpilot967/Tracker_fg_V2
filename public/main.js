@@ -15,7 +15,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -30,6 +30,8 @@ setTimeout(() => {
   updateArrayTaskItems(numberOfTasks, numberOfPilots);
   updateArrayTaskDate(numberOfTasks, numberOfPilots);
   updateArrayTaskBoxes(numberOfTasks, numberOfPilots);
+  updateArrayInfoItems(numberOfTasks, numberOfPilots);
+  updateArrayDetailItems(numberOfTasks, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -56,6 +58,8 @@ window.adminTableArray = adminTableArray;
 window.dataInitialTaskItems = dataInitialTaskItems;
 window.dateInitialTaskItems = dateInitialTaskItems;
 window.boxInitialTaskItems = boxInitialTaskItems;
+window.dataInfoItems = dataInfoItems;
+window.detailInfoItems = detailInfoItems;
 
 
 //------------------🧱 DOM Aufbau ------------------//

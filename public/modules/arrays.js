@@ -18,6 +18,9 @@ export let pilotComments = [];
 export let dataInitialTaskItems = {}; // das ist ein Objekt
 export let dateInitialTaskItems = {};
 export let boxInitialTaskItems = {};
+export let dataInfoItems = {};
+export let detailInfoItems = {};
+
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
 
@@ -180,7 +183,7 @@ export function updateArrayTaskItems(numberOfTasks, numberOfPilots) {
       if (!cell.dataset.listenerAdded) {
         cell.addEventListener("blur", () => {
           dataInitialTaskItems[`pilot${p}`][i] = cell.textContent.trim();
-          console.log(`Pilot ${p} - Task Array ab Reihe 9:`, dataInitialTaskItems[`pilot${p}`]);
+          console.log(`Pilot ${p} - Task Object ab Reihe 9:`, dataInitialTaskItems[`pilot${p}`]);
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -231,6 +234,55 @@ export function updateArrayTaskBoxes(numberOfTasks, numberOfPilots) {
             boxInitialTaskItems[`pilot${p}`][i] = cell.checked;
       
           console.log(`Pilot ${p} - Task Boxes Objekt:`, boxInitialTaskItems[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+//------------------- Info Items ab Position 9 (freie Felder; Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayInfoItems(numberOfTasks, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!dataInfoItems[`pilot${p}`]) {
+      dataInfoItems[`pilot${p}`] = [];
+    }
+  
+    for (let i = 8; i < numberOfTasks; i++) {
+      const cell = document.getElementById(`itemDetailLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          dataInfoItems[`pilot${p}`][i] = cell.textContent.trim();
+          console.log(`Pilot ${p} - Info-Item Object ab Reihe 9:`, dataInfoItems[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+
+//------------------- Detail Items ; ganze Spalte (freie Felder; Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayDetailItems(numberOfTasks, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!detailInfoItems[`pilot${p}`]) {
+      detailInfoItems[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfTasks; i++) {
+      const cell = document.getElementById(`inputDetailLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          detailInfoItems[`pilot${p}`][i] = cell.textContent.trim();
+          console.log(`Pilot ${p} - Detail Object aktualisiert:`, detailInfoItems[`pilot${p}`]);
         });
         cell.dataset.listenerAdded = "true";
       }

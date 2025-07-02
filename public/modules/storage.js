@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks } from '../main.js';
 
@@ -28,6 +28,8 @@ export async function saveTrackerData() {
     dataInitialTaskItems,
     dateInitialTaskItems,
     boxInitialTaskItems,
+    dataInfoItems,
+    detailInfoItems,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -190,6 +192,61 @@ export async function loadTrackerData() {
       }
     });
   }
+
+
+// DAS OBJEKT INFO/ITEM (ab Item 9) dataInfoItems LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(dataInfoItems).forEach(key => delete dataInfoItems[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.dataInfoItems && typeof result.dataInfoItems === "object" && !Array.isArray(result.dataInfoItems)) {
+    Object.assign(dataInfoItems, result.dataInfoItems);
+    console.log("✅ dataInfoItems korrekt geladen:", dataInfoItems);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für dataInfoItems:", result.dataInfoItems);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in dataInfoItems) {
+    const taskArray = dataInfoItems[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`itemDetailLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
+
+
+// DAS OBJEKT Detail/ITEM (ganze Spalte) detailInfoItems LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(detailInfoItems).forEach(key => delete detailInfoItems[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.detailInfoItems && typeof result.detailInfoItems === "object" && !Array.isArray(result.detailInfoItems)) {
+    Object.assign(detailInfoItems, result.detailInfoItems);
+    console.log("✅ detailInfoItems korrekt geladen:", detailInfoItems);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für detailInfoItems:", result.detailInfoItems);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in detailInfoItems) {
+    const taskArray = detailInfoItems[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`inputDetailLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
+
 
 
 
