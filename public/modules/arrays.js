@@ -22,6 +22,8 @@ export let dataInfoItems = {};
 export let detailInfoItems = {};
 export let inputPilotTable = {};
 export let dateLiPilotTable = {};
+export let validityPilotTable = {};
+export let expiryDatePilotTable = {};
 
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
@@ -317,25 +319,6 @@ export function updateArrayInputPilotTable(numberOfRowsPilots, numberOfPilots) {
 }
 
 
-
-
-//-------------------Pilot Comments (Array & DOM )---------------------------
-
-export function updateArrayPilotComments(numberOfPilots) {
-
-  for (let i = 0; i < numberOfPilots; i++) {
-    const cell = document.getElementById(`commentPilot${i}`);
-    if (!cell.dataset.listenerAdded) {
-      cell.addEventListener("blur", () => {
-        pilotComments[i] = cell.value.trim();
-        console.log("Pilot Comments Array aktualisiert", pilotComments);
-      });
-      cell.dataset.listenerAdded = "true";
-    }
-  }  
-}
-
-
 //------------------- License Date (Pilots Tables) (Array & DOM )---------------------------
 
 export function updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots) {
@@ -361,9 +344,71 @@ export function updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots) {
 }
 
 
+//-------------Pilot Table Validity ; ganze Spalte  (Array & DOM )---------------------------
+
+export function updateArrayValidityPilotTable(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!validityPilotTable[`pilot${p}`]) {
+      validityPilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`validityLiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          validityPilotTable[`pilot${p}`][i] = cell.textContent.trim();
+          console.log(`Pilot ${p} - Validity Object aktualisiert:`, validityPilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+//-------------Pilot Table New Expiry ; ganze Spalte  (Array & DOM )---------------------------
+
+export function updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!expiryDatePilotTable[`pilot${p}`]) {
+      expiryDatePilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`newExpiryDateLiLane${i}Pilot${p}`);
+      
+      const value = cell?.textContent.trim() || "";
+          expiryDatePilotTable[`pilot${p}`][i] = value;
+          
+    };
+  } 
+  console.log(`Expiry-Date Object aktualisiert:`);
+}
 
 
 
+
+
+
+
+//-------------------Pilot Comments (Array & DOM )---------------------------
+
+export function updateArrayPilotComments(numberOfPilots) {
+
+  for (let i = 0; i < numberOfPilots; i++) {
+    const cell = document.getElementById(`commentPilot${i}`);
+    if (!cell.dataset.listenerAdded) {
+      cell.addEventListener("blur", () => {
+        pilotComments[i] = cell.value.trim();
+        console.log("Pilot Comments Array aktualisiert", pilotComments);
+      });
+      cell.dataset.listenerAdded = "true";
+    }
+  }  
+}
 
 
 //============================== updates der Header ====================================

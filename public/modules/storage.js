@@ -1,8 +1,8 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable } from './arrays.js'
 
-import { numberOfPilots, numberOfTasks } from '../main.js';
+import { numberOfPilots, numberOfTasks, numberOfRowsPilots } from '../main.js';
 
 import {
   pilotNames,
@@ -17,6 +17,7 @@ import {
 
 
 export async function saveTrackerData() {
+  updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
   const data = {
     pilotNames,
     pilotRank,
@@ -32,6 +33,8 @@ export async function saveTrackerData() {
     detailInfoItems,
     inputPilotTable,
     dateLiPilotTable,
+    validityPilotTable,
+    expiryDatePilotTable,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -303,6 +306,59 @@ export async function loadTrackerData() {
   }
 
 
+// DAS OBJEKT Validity (ganze Spalte) validityPilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(validityPilotTable).forEach(key => delete validityPilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.validityPilotTable && typeof result.validityPilotTable === "object" && !Array.isArray(result.validityPilotTable)) {
+    Object.assign(validityPilotTable, result.validityPilotTable);
+    console.log("✅ validityPilotTable korrekt geladen:", validityPilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für validityPilotTable:", result.validityPilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in validityPilotTable) {
+    const taskArray = validityPilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`validityLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
+
+
+// DAS OBJEKT Expiry Date (ganze Spalte) expiryDatePilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(expiryDatePilotTable).forEach(key => delete expiryDatePilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.expiryDatePilotTable && typeof result.expiryDatePilotTable === "object" && !Array.isArray(result.expiryDatePilotTable)) {
+    Object.assign(expiryDatePilotTable, result.expiryDatePilotTable);
+    console.log("✅ expiryDatePilotTable korrekt geladen:", expiryDatePilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für expiryDatePilotTable:", result.expiryDatePilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in expiryDatePilotTable) {
+    const taskArray = expiryDatePilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`newExpiryDateLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
+
 
 
 
@@ -311,8 +367,8 @@ export async function loadTrackerData() {
   updatePilotParagraphRank();
   insertFixedDetailItems(numberOfPilots);
   insertFixedTaskItems(numberOfPilots);
-  updateArrayPilotComments(numberOfPilots);
-  updateArrayTaskItems(numberOfTasks, numberOfPilots);
+  //updateArrayPilotComments(numberOfPilots);
+  //updateArrayTaskItems(numberOfTasks, numberOfPilots);
 };
 
 
