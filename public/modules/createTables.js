@@ -19,7 +19,7 @@ export function createPilotTable(pilotNumber, numberOfRowsPilots) {
       <th>Expiry Date</th>
       <th>rem. Days</th>
       <th colspan="3" id="emailSent">Email sent</th>
-      <th>Scheduled slot</th>
+      <th>New scheduled slot</th>
     </tr>
   `;
 

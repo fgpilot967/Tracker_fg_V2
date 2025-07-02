@@ -15,7 +15,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable, updateArrayLicenseDate, dateLiPilotTable, updateArrayValidityPilotTable, updateArrayExpiryPilotTable, validityPilotTable, expiryDatePilotTable } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable, updateArrayLicenseDate, dateLiPilotTable, updateArrayValidityPilotTable, updateArrayExpiryPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayRemDaysPilotTable, remDaysPilotTable } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -36,6 +36,7 @@ setTimeout(() => {
   updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots);
   updateArrayValidityPilotTable(numberOfRowsPilots, numberOfPilots);
   updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
+  updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -68,6 +69,7 @@ window.inputPilotTable = inputPilotTable;
 window.dateLiPilotTable = dateLiPilotTable;
 window.validityPilotTable = validityPilotTable;
 window.expiryDatePilotTable = expiryDatePilotTable;
+window.remDaysPilotTable = remDaysPilotTable;
 
 
 //------------------🧱 DOM Aufbau ------------------//

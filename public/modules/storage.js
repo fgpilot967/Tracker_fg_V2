@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks, numberOfRowsPilots } from '../main.js';
 
@@ -18,6 +18,8 @@ import {
 
 export async function saveTrackerData() {
   updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
+  updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots);
+
   const data = {
     pilotNames,
     pilotRank,
@@ -35,6 +37,7 @@ export async function saveTrackerData() {
     dateLiPilotTable,
     validityPilotTable,
     expiryDatePilotTable,
+    remDaysPilotTable,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -359,6 +362,32 @@ export async function loadTrackerData() {
     });
   }
 
+
+// DAS OBJEKT REM DAYS (ganze Spalte) remDaysPilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(remDaysPilotTable).forEach(key => delete remDaysPilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.remDaysPilotTable && typeof result.remDaysPilotTable === "object" && !Array.isArray(result.remDaysPilotTable)) {
+    Object.assign(remDaysPilotTable, result.remDaysPilotTable);
+    console.log("✅ remDaysPilotTable korrekt geladen:", remDaysPilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für remDaysPilotTable:", result.remDaysPilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in remDaysPilotTable) {
+    const taskArray = remDaysPilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`remDaysLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.textContent = value;
+      }
+    });
+  }
 
 
 

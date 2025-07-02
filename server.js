@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 
+
 const app = express();
 const PORT = 3000;
 
@@ -52,6 +53,7 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "dateLiPilotTable.json"), JSON.stringify(data.dateLiPilotTable));
     fs.writeFileSync(path.join(userDir, "validityPilotTable.json"), JSON.stringify(data.validityPilotTable));
     fs.writeFileSync(path.join(userDir, "expiryDatePilotTable.json"), JSON.stringify(data.expiryDatePilotTable));
+    fs.writeFileSync(path.join(userDir, "remDaysPilotTable.json"), JSON.stringify(data.remDaysPilotTable));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
 
@@ -99,6 +101,7 @@ app.get("/load/:user", (req, res) => {
     dateLiPilotTable: loadJsonSafely(path.join(userDir, "dateLiPilotTable.json")),
     validityPilotTable: loadJsonSafely(path.join(userDir, "validityPilotTable.json")),
     expiryDatePilotTable: loadJsonSafely(path.join(userDir, "expiryDatePilotTable.json")),
+    remDaysPilotTable: loadJsonSafely(path.join(userDir, "remDaysPilotTable.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
 

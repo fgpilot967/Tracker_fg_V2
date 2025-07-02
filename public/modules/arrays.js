@@ -24,6 +24,7 @@ export let inputPilotTable = {};
 export let dateLiPilotTable = {};
 export let validityPilotTable = {};
 export let expiryDatePilotTable = {};
+export let remDaysPilotTable = {};
 
 //export let initialTaskDate = [];
 //export let initialTaskBox = [];
@@ -388,6 +389,26 @@ export function updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots) 
   console.log(`Expiry-Date Object aktualisiert:`);
 }
 
+
+//-------------Pilot Table REM DAYS ; ganze Spalte  (Array & DOM )---------------------------
+
+export function updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!remDaysPilotTable[`pilot${p}`]) {
+      remDaysPilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`remDaysLiLane${i}Pilot${p}`);
+      
+      const value = cell?.textContent.trim() || "";
+          remDaysPilotTable[`pilot${p}`][i] = value;
+          
+    };
+  } 
+  console.log(`REM DAYS Object aktualisiert:`);
+}
 
 
 
