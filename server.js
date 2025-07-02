@@ -44,8 +44,10 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "pilotComments.json"), JSON.stringify(data.pilotComments));
     fs.writeFileSync(path.join(userDir, "dataInitialTaskItems.json"), JSON.stringify(data.dataInitialTaskItems));
     fs.writeFileSync(path.join(userDir, "dateInitialTaskItems.json"), JSON.stringify(data.dateInitialTaskItems));
+    fs.writeFileSync(path.join(userDir, "boxInitialTaskItems.json"), JSON.stringify(data.boxInitialTaskItems));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
+
     console.log(`✅ Daten für ${user} gespeichert.`);
     res.send(`Daten für ${user} erfolgreich gespeichert`);
   } catch (err) {
@@ -83,10 +85,11 @@ app.get("/load/:user", (req, res) => {
     pilotComments: loadJsonSafely(path.join(userDir, "pilotComments.json")),
     dataInitialTaskItems: loadJsonSafely(path.join(userDir, "dataInitialTaskItems.json")),
     dateInitialTaskItems: loadJsonSafely(path.join(userDir, "dateInitialTaskItems.json")),
+    boxInitialTaskItems: loadJsonSafely(path.join(userDir, "boxInitialTaskItems.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
-  };
 
+  } 
   res.json(result);
 });
 

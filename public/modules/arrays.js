@@ -35,15 +35,15 @@ export function updateArrayPilotNames(numberOfPilots) {
       cell.addEventListener("blur", () => {
         pilotNames[i] = cell.textContent.trim();
         for (let p = 1; p <= numberOfPilots; p++) {
-          updatePilotParagraph(p);
+         
         }
         console.log("pilotNames Array aktualisiert:", pilotNames);
         updatePilotHeadlines();
+        updatePilotParagraph();
       });
       cell.dataset.listenerAdded = "true"; 
     }
   }  
-  updatePilotParagraph(); 
 }
 
 
@@ -59,10 +59,6 @@ export function updateArrayPilotRank(numberOfPilots) {
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("blur", () => {
         pilotRank[i] = cell.textContent.trim();
-        
-//        for (let p = 1; p <= numberOfPilots; p++) {
-//          updatePilotParagraphRank(p);
-//        }
         console.log("pilotRank Array aktualisiert:", pilotRank);
         updatePilotHeadlines();
         updatePilotParagraphRank();
@@ -70,7 +66,6 @@ export function updateArrayPilotRank(numberOfPilots) {
       cell.dataset.listenerAdded = "true";
     }
   }
-//  updatePilotParagraphRank();
 }
 
 

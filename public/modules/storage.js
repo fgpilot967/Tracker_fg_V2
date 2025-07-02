@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks } from '../main.js';
 
@@ -27,6 +27,7 @@ export async function saveTrackerData() {
     pilotComments,
     dataInitialTaskItems,
     dateInitialTaskItems,
+    boxInitialTaskItems,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -110,7 +111,7 @@ export async function loadTrackerData() {
   });
 
 
-  // DAS OBJEKT ITEM dataInitialTaskItem LADEN ---- Leere das Objekt zuerst!
+  // DAS OBJEKT DATA/ITEM (ab Item 9) dataInitialTaskItem LADEN ---- Leere das Objekt zuerst!
 
   Object.keys(dataInitialTaskItems).forEach(key => delete dataInitialTaskItems[key]);
 
@@ -164,8 +165,31 @@ export async function loadTrackerData() {
   }
 
 
+// DAS OBJEKT BOXboxInitialTaskItem LADEN ---- Leere das Objekt zuerst!
 
+  Object.keys(boxInitialTaskItems).forEach(key => delete boxInitialTaskItems[key]);
 
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.boxInitialTaskItems && typeof result.boxInitialTaskItems === "object" && !Array.isArray(result.boxInitialTaskItems)) {
+    Object.assign(boxInitialTaskItems, result.boxInitialTaskItems);
+    console.log("✅ boxInitialTaskItems korrekt geladen:", boxInitialTaskItems);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für boxInitialTaskItems:", result.boxInitialTaskItems);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in boxInitialTaskItems) {
+    const taskArray = boxInitialTaskItems[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`itemCompanyPassedLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.checked = value;
+      }
+    });
+  }
 
 
 
