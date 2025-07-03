@@ -11,7 +11,8 @@
 </head>
 <body>
 
-  
+  <div class="welcome-flex">
+
     <div id="welcome" class="welcome-box">
       <h1>Herzlich Willkommen!</h1>
       <h3>Bitte einloggen, um fortzufahren.</h3>
@@ -20,11 +21,12 @@
 
     <div id="loginContainer" class="login-box">
       <h2>Login</h2>
-      <input type="text" id="usernameInput" placeholder="Benutzername">
-      <button onclick="login()">Login</button>
-      <button onclick="login('gast')">Gastzugang</button>
+      <input type="text" id="usernameInput" placeholder="Benutzername" onfocus="this.value=''">
+      <button onclick="login()" class="inputButton">Login</button>
+      <button onclick="login('gast')" class="inputButton">Gastzugang</button>
     </div>
 
+  </div>
 
 
     <div class="navbar" id="showNavbar">

@@ -420,7 +420,7 @@ export function updateArrayCb30Box(numberOfRowsPilots, numberOfPilots) {
       cb30PilotTable[`pilot${p}`] = [];
     }
   
-    for (let i = 1; i < numberOfRowsPilots; i++) {
+    for (let i = 1; i < numberOfRowsPilots + 1; i++) {
       const cell = document.getElementById(`emailSent30LiLane${i}Pilot${p}`);
       
       if (!cell.dataset.listenerAdded) {
@@ -446,7 +446,7 @@ export function updateArrayCb60Box(numberOfRowsPilots, numberOfPilots) {
       cb60PilotTable[`pilot${p}`] = [];
     }
   
-    for (let i = 1; i < numberOfRowsPilots; i++) {
+    for (let i = 1; i < numberOfRowsPilots + 1; i++) {
       const cell = document.getElementById(`emailSent60LiLane${i}Pilot${p}`);
       
       if (!cell.dataset.listenerAdded) {
@@ -472,7 +472,7 @@ export function updateArrayCb90Box(numberOfRowsPilots, numberOfPilots) {
       cb90PilotTable[`pilot${p}`] = [];
     }
   
-    for (let i = 1; i < numberOfRowsPilots; i++) {
+    for (let i = 1; i < numberOfRowsPilots + 1; i++) {
       const cell = document.getElementById(`emailSent90LiLane${i}Pilot${p}`);
       
       if (!cell.dataset.listenerAdded) {

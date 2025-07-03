@@ -88,14 +88,14 @@ window.user = null;
 function login(name) {
   const inputName = name || document.getElementById("usernameInput").value.trim();
   if (!inputName) {
-    alert("Bitte Benutzernamen eingeben!");
+    alert(" ☝️ Bitte Benutzernamen eingeben!");
     return;
   } else if (inputName === "frankie" || inputName === "fgpilot" || inputName === "peter") {
-    alert("Korrekter Login");
+    alert(`Hallo ${inputName} | 🛩️ Korrekter Login`);
   } else if (inputName === "gast") {
-    alert("Als Gast eingeloggt");
+    alert(" 🐥 Als Gast eingeloggt");
   } else {
-    alert("Name nicht korrekt. Bitte noch einmal versuchen");
+    alert(" 👎 Name nicht korrekt. Bitte noch einmal versuchen");
     return;
   }
   
