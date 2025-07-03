@@ -80,6 +80,39 @@ window.cb90PilotTable = cb90PilotTable;
 window.newSlotDate = newSlotDate;
 
 
+  document.getElementById("showNavbar").style.display = "none";
+
+window.login = login;
+window.user = null;
+
+function login(name) {
+  const inputName = name || document.getElementById("usernameInput").value.trim();
+  if (!inputName) {
+    alert("Bitte Benutzernamen eingeben!");
+    return;
+  } else if (inputName === "frankie" || inputName === "fgpilot" || inputName === "peter") {
+    alert("Korrekter Login");
+  } else if (inputName === "gast") {
+    alert("Als Gast eingeloggt");
+  } else {
+    alert("Name nicht korrekt. Bitte noch einmal versuchen");
+    return;
+  }
+  
+
+  // Gastzugang oder echter Benutzer
+  window.user = inputName;
+  console.log("✅ Eingeloggt als:", window.user);
+
+  document.getElementById("loginContainer").style.display = "none";
+  document.getElementById("showNavbar").style.display = "block"; // Beispiel: Navbar anzeigen
+
+  // Optional: Daten laden
+  loadTrackerData(user);
+}
+
+
+
 //------------------🧱 DOM Aufbau ------------------//
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content geladen");

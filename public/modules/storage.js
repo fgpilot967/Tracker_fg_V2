@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable, cb30PilotTable, cb60PilotTable, cb90PilotTable, newSlotDate } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable, cb30PilotTable, cb60PilotTable, cb90PilotTable, newSlotDate } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks, numberOfRowsPilots } from '../main.js';
 
@@ -22,7 +22,7 @@ export async function saveTrackerData() {
   updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
   updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots);
 
-
+  const user = window.user;
   const data = {
     pilotNames,
     pilotRank,

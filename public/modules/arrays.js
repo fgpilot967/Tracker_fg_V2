@@ -2,10 +2,9 @@
 
 // modules/arrays.js
 
-import { numberOfPilots } from '../main.js';
+import { numberOfPilots, } from '../main.js';
 
-
-export const user = "fgpilot";          // Benutzer; später als Variable
+//export const user = "fgpilot";                                    // Benutzer; später als Variable
 
 
 export let pilotNames = [];   
@@ -37,6 +36,7 @@ export let newSlotDate = {};
 
 export function updateArrayPilotNames(numberOfPilots) {
   //pilotNames = [];
+
   
   for (let i = 0; i < numberOfPilots; i++) {
     const cell = document.getElementById(`pilotName${i}`);
@@ -45,9 +45,6 @@ export function updateArrayPilotNames(numberOfPilots) {
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("blur", () => {
         pilotNames[i] = cell.textContent.trim();
-        for (let p = 1; p <= numberOfPilots; p++) {
-         
-        }
         console.log("pilotNames Array aktualisiert:", pilotNames);
         updatePilotHeadlines();
         updatePilotParagraph();
