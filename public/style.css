@@ -92,6 +92,16 @@ body {
   display: block;
 }
 
+.welcome-box {
+  text-align: center;
+  padding: 2em;
+  background-color: rgb(168, 185, 170);
+  border-radius: 12px;
+  margin: 10em auto;
+  max-width: 600px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
 .tabcontent {
   display: none;
   margin-top: 60px;

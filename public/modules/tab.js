@@ -7,6 +7,8 @@ console.log("tab.js geladen");
 
 export function openTab(evt, tabName) {
   const tabcontent = document.getElementsByClassName("tabcontent");
+  const welcome = document.getElementById("welcome");
+  if (welcome) welcome.style.display = "none";
   for (let i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
