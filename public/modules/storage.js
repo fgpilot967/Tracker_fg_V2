@@ -1,6 +1,6 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable, cb30PilotTable, cb60PilotTable, cb90PilotTable } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable, cb30PilotTable, cb60PilotTable, cb90PilotTable, newSlotDate } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks, numberOfRowsPilots } from '../main.js';
 
@@ -44,6 +44,7 @@ export async function saveTrackerData() {
     cb30PilotTable,
     cb60PilotTable,
     cb90PilotTable,
+    newSlotDate,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -476,6 +477,32 @@ export async function loadTrackerData() {
     });
   }
 
+
+// DAS OBJEKT New Slot DATE newSlotDate LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(newSlotDate).forEach(key => delete newSlotDate[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.newSlotDate && typeof result.newSlotDate === "object" && !Array.isArray(result.newSlotDate)) {
+    Object.assign(newSlotDate, result.newSlotDate);
+    console.log("✅ newSlotDate korrekt geladen:", newSlotDate);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für newSlotDate:", result.newSlotDate);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in newSlotDate) {
+    const taskArray = newSlotDate[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`newEventLiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.value = value;
+      }
+    });
+  }
 
 
 

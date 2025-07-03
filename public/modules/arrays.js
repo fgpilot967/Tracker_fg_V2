@@ -28,6 +28,7 @@ export let remDaysPilotTable = {};
 export let cb30PilotTable = {};
 export let cb60PilotTable = {};
 export let cb90PilotTable = {};
+export let newSlotDate = {};
 
 
 
@@ -490,6 +491,30 @@ export function updateArrayCb90Box(numberOfRowsPilots, numberOfPilots) {
   }
 }
 
+
+//------------------- New scheduled slot Date (Pilots Tables) (Array & DOM )---------------------------
+
+export function updateArrayNewSlotDate(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!newSlotDate[`pilot${p}`]) {
+      newSlotDate[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i <= numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`newEventLiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("blur", () => {
+          newSlotDate[`pilot${p}`][i] = cell.value.trim();
+          console.log(`Pilot ${p} - New slot Date Objekt:`, newSlotDate[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+  console.log("newSlotDate durchlaufen");
+}
 
 
 

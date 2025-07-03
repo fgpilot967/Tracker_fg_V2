@@ -57,6 +57,7 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "cb30PilotTable.json"), JSON.stringify(data.cb30PilotTable));
     fs.writeFileSync(path.join(userDir, "cb60PilotTable.json"), JSON.stringify(data.cb60PilotTable));
     fs.writeFileSync(path.join(userDir, "cb90PilotTable.json"), JSON.stringify(data.cb90PilotTable));
+    fs.writeFileSync(path.join(userDir, "newSlotDate.json"), JSON.stringify(data.newSlotDate));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
 
@@ -108,6 +109,7 @@ app.get("/load/:user", (req, res) => {
     cb30PilotTable: loadJsonSafely(path.join(userDir, "cb30PilotTable.json")),
     cb60PilotTable: loadJsonSafely(path.join(userDir, "cb60PilotTable.json")),
     cb90PilotTable: loadJsonSafely(path.join(userDir, "cb90PilotTable.json")),
+    newSlotDate: loadJsonSafely(path.join(userDir, "newSlotDate.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
 

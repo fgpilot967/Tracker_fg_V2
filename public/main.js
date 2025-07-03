@@ -15,7 +15,7 @@ import { saveTrackerData, loadTrackerData } from './modules/storage.js';
 import { createPilotTable, createPilotCompanyTable, createPilotDetailTable } from './modules/createTables.js';
 import { openTab, updatePilotDropdownFromTable } from './modules/tab.js';
 import { calculateRow } from './modules/calculations.js';
-import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable, updateArrayLicenseDate, dateLiPilotTable, updateArrayValidityPilotTable, updateArrayExpiryPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayRemDaysPilotTable, remDaysPilotTable, updateArrayCb30Box, cb30PilotTable, updateArrayCb60Box, cb60PilotTable, updateArrayCb90Box, cb90PilotTable } from './modules/arrays.js';
+import { pilotNames, pilotRank, notifyEmailPilots, updateArrayPilotNames, updateArrayPilotRank, updateArrayNotifyEmail, updateArrayAdminTable, adminTableArray, updateFixDetailTableArray, updateFixTaskTableArray, updateArrayPilotComments, updateArrayTaskItems, dataInitialTaskItems, updateArrayTaskDate, dateInitialTaskItems, updateArrayTaskBoxes, boxInitialTaskItems, updateArrayInfoItems, dataInfoItems, updateArrayDetailItems, detailInfoItems, inputPilotTable, updateArrayInputPilotTable, updateArrayLicenseDate, dateLiPilotTable, updateArrayValidityPilotTable, updateArrayExpiryPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayRemDaysPilotTable, remDaysPilotTable, updateArrayCb30Box, cb30PilotTable, updateArrayCb60Box, cb60PilotTable, updateArrayCb90Box, cb90PilotTable, updateArrayNewSlotDate, newSlotDate } from './modules/arrays.js';
 
 
 //------------------🧠 Initialisierungs-Sicherung ------------------//
@@ -40,6 +40,7 @@ setTimeout(() => {
   updateArrayCb30Box(numberOfRowsPilots, numberOfPilots);
   updateArrayCb60Box(numberOfRowsPilots, numberOfPilots);
   updateArrayCb90Box(numberOfRowsPilots, numberOfPilots);
+  updateArrayNewSlotDate(numberOfRowsPilots, numberOfPilots);
 
   //saveTrackerData();
   //loadTrackerData();
@@ -76,6 +77,7 @@ window.remDaysPilotTable = remDaysPilotTable;
 window.cb30PilotTable = cb30PilotTable;
 window.cb60PilotTable = cb60PilotTable;
 window.cb90PilotTable = cb90PilotTable;
+window.newSlotDate = newSlotDate;
 
 
 //------------------🧱 DOM Aufbau ------------------//
