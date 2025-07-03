@@ -64,10 +64,10 @@ export function calculateRow(pilotNumber, rowNumber) {
 
   // 📬 Automatisch senden
   if (diffDays <= 30 && !document.getElementById(cb30)?.checked) {
-    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb30, notifyEmailPilots[(pilotNumber-1)]);
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb30, notifyEmailPilots[(pilotNumber-1)], adminTableArray);
   }
   if (diffDays <= 60 && !document.getElementById(cb60)?.checked) {
-    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb60, notifyEmailPilots[(pilotNumber-1)]);
+    sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb60, notifyEmailPilots[(pilotNumber-1)], adminTableArray);
   }
   if (diffDays <= 90 && !document.getElementById(cb90)?.checked) {
     sendEmail(diffDays, licenseName, pilotNames[(pilotNumber-1)], cb90, notifyEmailPilots[(pilotNumber-1)], adminTableArray);

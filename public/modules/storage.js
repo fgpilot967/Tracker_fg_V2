@@ -1,8 +1,10 @@
 // storage.js (public/modules)
 
-import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable } from './arrays.js'
+import { insertFixedTaskItems, insertFixedDetailItems, updatePilotHeadlines, updatePilotParagraph, updatePilotParagraphRank , user, updateArrayPilotComments, dataInitialTaskItems, updateArrayTaskItems, dateInitialTaskItems, boxInitialTaskItems, dataInfoItems, detailInfoItems, inputPilotTable, dateLiPilotTable, validityPilotTable, expiryDatePilotTable, updateArrayExpiryPilotTable, remDaysPilotTable, updateArrayRemDaysPilotTable, cb30PilotTable, cb60PilotTable, cb90PilotTable } from './arrays.js'
 
 import { numberOfPilots, numberOfTasks, numberOfRowsPilots } from '../main.js';
+
+import { updateAllPilots } from './calculations.js';
 
 import {
   pilotNames,
@@ -19,6 +21,7 @@ import {
 export async function saveTrackerData() {
   updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
   updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots);
+
 
   const data = {
     pilotNames,
@@ -38,6 +41,9 @@ export async function saveTrackerData() {
     validityPilotTable,
     expiryDatePilotTable,
     remDaysPilotTable,
+    cb30PilotTable,
+    cb60PilotTable,
+    cb90PilotTable,
 
     // Hier kannst du später weitere Arrays ergänzen
   };
@@ -390,7 +396,90 @@ export async function loadTrackerData() {
   }
 
 
+  // DAS OBJEKT cb30 Pilot Table cb30PilotTable LADEN ---- Leere das Objekt zuerst!
 
+  Object.keys(cb30PilotTable).forEach(key => delete cb30PilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.cb30PilotTable && typeof result.cb30PilotTable === "object" && !Array.isArray(result.cb30PilotTable)) {
+    Object.assign(cb30PilotTable, result.cb30PilotTable);
+    console.log("✅ cb30PilotTable korrekt geladen:", cb30PilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für cb30PilotTable:", result.cb30PilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in cb30PilotTable) {
+    const taskArray = cb30PilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`emailSent30LiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.checked = value;
+      }
+    });
+  }
+
+
+// DAS OBJEKT cb60 Pilot Table cb60PilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(cb60PilotTable).forEach(key => delete cb60PilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.cb60PilotTable && typeof result.cb60PilotTable === "object" && !Array.isArray(result.cb60PilotTable)) {
+    Object.assign(cb60PilotTable, result.cb60PilotTable);
+    console.log("✅ cb60PilotTable korrekt geladen:", cb60PilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für cb60PilotTable:", result.cb60PilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in cb60PilotTable) {
+    const taskArray = cb60PilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`emailSent60LiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.checked = value;
+      }
+    });
+  }
+
+
+// DAS OBJEKT cb90 Pilot Table cb90PilotTable LADEN ---- Leere das Objekt zuerst!
+
+  Object.keys(cb90PilotTable).forEach(key => delete cb90PilotTable[key]);
+
+  // Übernimm die geladenen Daten (falls es ein Objekt ist)
+  if (result.cb90PilotTable && typeof result.cb90PilotTable === "object" && !Array.isArray(result.cb90PilotTable)) {
+    Object.assign(cb90PilotTable, result.cb90PilotTable);
+    console.log("✅ cb90PilotTable korrekt geladen:", cb90PilotTable);
+  } else {
+    console.warn("⚠️ Unerwartetes Format für cb90PilotTable:", result.cb90PilotTable);
+  }
+
+  // Daten (also die Arrays in dem Objekt) aus dem Objekt in die Zellen schreiben
+  for (let pilotId in cb90PilotTable) {
+    const taskArray = cb90PilotTable[pilotId];
+
+    // Extrahiere die Pilotnummer (z. B. aus "pilot1" → 1)
+    const pilotNum = pilotId.replace("pilot", "");
+    taskArray.forEach((value, rowIndex) => {             // rowIndex wurde beim speichern erstellt/übernommem
+      const cell = document.getElementById(`emailSent90LiLane${rowIndex}Pilot${pilotNum}`); // pilotNum siehe const pilotNum
+      if (cell) {
+        cell.checked = value;
+      }
+    });
+  }
+
+
+
+
+  updateAllPilots(numberOfPilots, numberOfRowsPilots);
   updatePilotParagraph();
   updatePilotHeadlines();
   updatePilotParagraphRank();

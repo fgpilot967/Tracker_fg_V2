@@ -25,9 +25,11 @@ export let dateLiPilotTable = {};
 export let validityPilotTable = {};
 export let expiryDatePilotTable = {};
 export let remDaysPilotTable = {};
+export let cb30PilotTable = {};
+export let cb60PilotTable = {};
+export let cb90PilotTable = {};
 
-//export let initialTaskDate = [];
-//export let initialTaskBox = [];
+
 
 
 //-------------------Pilot Names (Array & DOM)---------------------------
@@ -410,6 +412,83 @@ export function updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots)
   console.log(`REM DAYS Object aktualisiert:`);
 }
 
+
+//------------------- 30 Checkbox (Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayCb30Box(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!cb30PilotTable[`pilot${p}`]) {
+      cb30PilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`emailSent30LiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("change", () => {
+          
+            cb30PilotTable[`pilot${p}`][i] = cell.checked;
+      
+          console.log(`Pilot ${p} - cb30 Boxes Objekt:`, cb30PilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+//------------------- 60 Checkbox (Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayCb60Box(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!cb60PilotTable[`pilot${p}`]) {
+      cb60PilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`emailSent60LiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("change", () => {
+          
+            cb60PilotTable[`pilot${p}`][i] = cell.checked;
+      
+          console.log(`Pilot ${p} - cb60 Boxes Objekt:`, cb60PilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
+
+
+//------------------- 90 Checkbox (Pilots Details) (Array & DOM )---------------------------
+
+export function updateArrayCb90Box(numberOfRowsPilots, numberOfPilots) {
+  
+  for (let p = 1; p <= numberOfPilots; p++) {
+    if (!cb90PilotTable[`pilot${p}`]) {
+      cb90PilotTable[`pilot${p}`] = [];
+    }
+  
+    for (let i = 1; i < numberOfRowsPilots; i++) {
+      const cell = document.getElementById(`emailSent90LiLane${i}Pilot${p}`);
+      
+      if (!cell.dataset.listenerAdded) {
+        cell.addEventListener("change", () => {
+          
+            cb90PilotTable[`pilot${p}`][i] = cell.checked;
+      
+          console.log(`Pilot ${p} - cb90 Boxes Objekt:`, cb90PilotTable[`pilot${p}`]);
+        });
+        cell.dataset.listenerAdded = "true";
+      }
+    }
+  }
+}
 
 
 

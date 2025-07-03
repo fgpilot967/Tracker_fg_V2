@@ -14,6 +14,8 @@ export function sendEmail(diffDays, licenseName, pilotNames, checkboxId, notifyE
 
   const checkbox = document.getElementById(checkboxId);
   if (checkbox) checkbox.checked = true;
+  checkbox.dispatchEvent(new Event("change"));
+
 
 }
 

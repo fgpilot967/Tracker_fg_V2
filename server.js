@@ -54,6 +54,9 @@ app.post("/save", (req, res) => {
     fs.writeFileSync(path.join(userDir, "validityPilotTable.json"), JSON.stringify(data.validityPilotTable));
     fs.writeFileSync(path.join(userDir, "expiryDatePilotTable.json"), JSON.stringify(data.expiryDatePilotTable));
     fs.writeFileSync(path.join(userDir, "remDaysPilotTable.json"), JSON.stringify(data.remDaysPilotTable));
+    fs.writeFileSync(path.join(userDir, "cb30PilotTable.json"), JSON.stringify(data.cb30PilotTable));
+    fs.writeFileSync(path.join(userDir, "cb60PilotTable.json"), JSON.stringify(data.cb60PilotTable));
+    fs.writeFileSync(path.join(userDir, "cb90PilotTable.json"), JSON.stringify(data.cb90PilotTable));
 
     // 📝 Hier kannst du beliebig weitere Felder speichern
 
@@ -102,6 +105,9 @@ app.get("/load/:user", (req, res) => {
     validityPilotTable: loadJsonSafely(path.join(userDir, "validityPilotTable.json")),
     expiryDatePilotTable: loadJsonSafely(path.join(userDir, "expiryDatePilotTable.json")),
     remDaysPilotTable: loadJsonSafely(path.join(userDir, "remDaysPilotTable.json")),
+    cb30PilotTable: loadJsonSafely(path.join(userDir, "cb30PilotTable.json")),
+    cb60PilotTable: loadJsonSafely(path.join(userDir, "cb60PilotTable.json")),
+    cb90PilotTable: loadJsonSafely(path.join(userDir, "cb90PilotTable.json")),
 
     // 📝 Hier auch weitere Felder lesen, falls nötig
 
