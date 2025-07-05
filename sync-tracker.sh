@@ -2,7 +2,7 @@
 
 echo "Starte rsync Tracker_fg_V2 zum Server pilot-tracker"
 
-rsync -avz \
+rsync -avz --delete \
 	--exclude=node_modules \
 	--exclude=.git \
 	--exclude='.gitattributes' \
