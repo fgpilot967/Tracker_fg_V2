@@ -2,7 +2,7 @@
 
 // modules/arrays.js
 
-import { numberOfPilots, } from '../main.js';
+import { numberOfPilots, markSaveNeeded } from '../main.js';
 
 //export const user = "fgpilot";                                    // Benutzer; später als Variable
 
@@ -46,6 +46,7 @@ export function updateArrayPilotNames(numberOfPilots) {
       cell.addEventListener("blur", () => {
         pilotNames[i] = cell.textContent.trim();
         console.log("pilotNames Array aktualisiert:", pilotNames);
+        markSaveNeeded();
         updatePilotHeadlines();
         updatePilotParagraph();
       });
@@ -68,6 +69,7 @@ export function updateArrayPilotRank(numberOfPilots) {
       cell.addEventListener("blur", () => {
         pilotRank[i] = cell.textContent.trim();
         console.log("pilotRank Array aktualisiert:", pilotRank);
+        markSaveNeeded();
         updatePilotHeadlines();
         updatePilotParagraphRank();
       });
@@ -86,6 +88,7 @@ export function updateArrayNotifyEmail(numberOfPilots) {
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("blur", () => {
         notifyEmailPilots[i] = cell.textContent.trim();
+        markSaveNeeded();
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -103,6 +106,7 @@ export function updateArrayAdminTable() {
       cell.addEventListener("blur", () => {
         adminTableArray[i] = cell.textContent.trim();
         console.log("adminTableArray aktualisiert", adminTableArray);
+        markSaveNeeded();
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -120,6 +124,7 @@ export function updateFixDetailTableArray(numberOfFixItems) {
     if (!cell.dataset.listenerAdded) {
       cell.addEventListener("blur", () => {
         fixedDetailItems[i] = cell.textContent.trim();
+        markSaveNeeded();
         //for (let p = 1; p <= numberOfPilots; p++) {
         insertFixedDetailItems(numberOfPilots);
         //}
@@ -154,6 +159,7 @@ export function updateFixTaskTableArray(numberOfFixTask) {
         fixedTaskItems[i] = cell.textContent.trim(); 
         insertFixedTaskItems(numberOfPilots);
         console.log("Fix Task Array aktualisiert:", fixedTaskItems);
+        markSaveNeeded();
       });
       cell.dataset.listenerAdded = "true";
     }
@@ -189,6 +195,7 @@ export function updateArrayTaskItems(numberOfTasks, numberOfPilots) {
         cell.addEventListener("blur", () => {
           dataInitialTaskItems[`pilot${p}`][i] = cell.textContent.trim();
           console.log(`Pilot ${p} - Task Object ab Reihe 9:`, dataInitialTaskItems[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -213,6 +220,7 @@ export function updateArrayTaskDate(numberOfTasks, numberOfPilots) {
         cell.addEventListener("blur", () => {
           dateInitialTaskItems[`pilot${p}`][i] = cell.value.trim();
           console.log(`Pilot ${p} - Task Date Objekt:`, dateInitialTaskItems[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -239,6 +247,7 @@ export function updateArrayTaskBoxes(numberOfTasks, numberOfPilots) {
             boxInitialTaskItems[`pilot${p}`][i] = cell.checked;
       
           console.log(`Pilot ${p} - Task Boxes Objekt:`, boxInitialTaskItems[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -263,6 +272,7 @@ export function updateArrayInfoItems(numberOfTasks, numberOfPilots) {
         cell.addEventListener("blur", () => {
           dataInfoItems[`pilot${p}`][i] = cell.textContent.trim();
           console.log(`Pilot ${p} - Info-Item Object ab Reihe 9:`, dataInfoItems[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -288,6 +298,7 @@ export function updateArrayDetailItems(numberOfTasks, numberOfPilots) {
         cell.addEventListener("blur", () => {
           detailInfoItems[`pilot${p}`][i] = cell.textContent.trim();
           console.log(`Pilot ${p} - Detail Object aktualisiert:`, detailInfoItems[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -312,6 +323,7 @@ export function updateArrayInputPilotTable(numberOfRowsPilots, numberOfPilots) {
         cell.addEventListener("blur", () => {
           inputPilotTable[`pilot${p}`][i] = cell.textContent.trim();
           console.log(`Pilot ${p} - License Object aktualisiert:`, inputPilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -336,6 +348,7 @@ export function updateArrayLicenseDate(numberOfRowsPilots, numberOfPilots) {
         cell.addEventListener("blur", () => {
           dateLiPilotTable[`pilot${p}`][i] = cell.value.trim();
           console.log(`Pilot ${p} - Last Check Date Objekt:`, dateLiPilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -361,6 +374,7 @@ export function updateArrayValidityPilotTable(numberOfRowsPilots, numberOfPilots
         cell.addEventListener("blur", () => {
           validityPilotTable[`pilot${p}`][i] = cell.textContent.trim();
           console.log(`Pilot ${p} - Validity Object aktualisiert:`, validityPilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -429,6 +443,7 @@ export function updateArrayCb30Box(numberOfRowsPilots, numberOfPilots) {
             cb30PilotTable[`pilot${p}`][i] = cell.checked;
       
           console.log(`Pilot ${p} - cb30 Boxes Objekt:`, cb30PilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -455,6 +470,7 @@ export function updateArrayCb60Box(numberOfRowsPilots, numberOfPilots) {
             cb60PilotTable[`pilot${p}`][i] = cell.checked;
       
           console.log(`Pilot ${p} - cb60 Boxes Objekt:`, cb60PilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -481,6 +497,7 @@ export function updateArrayCb90Box(numberOfRowsPilots, numberOfPilots) {
             cb90PilotTable[`pilot${p}`][i] = cell.checked;
       
           console.log(`Pilot ${p} - cb90 Boxes Objekt:`, cb90PilotTable[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -505,6 +522,7 @@ export function updateArrayNewSlotDate(numberOfRowsPilots, numberOfPilots) {
         cell.addEventListener("blur", () => {
           newSlotDate[`pilot${p}`][i] = cell.value.trim();
           console.log(`Pilot ${p} - New slot Date Objekt:`, newSlotDate[`pilot${p}`]);
+          markSaveNeeded();
         });
         cell.dataset.listenerAdded = "true";
       }
@@ -526,6 +544,7 @@ export function updateArrayPilotComments(numberOfPilots) {
       cell.addEventListener("blur", () => {
         pilotComments[i] = cell.value.trim();
         console.log("Pilot Comments Array aktualisiert", pilotComments);
+        markSaveNeeded();
       });
       cell.dataset.listenerAdded = "true";
     }

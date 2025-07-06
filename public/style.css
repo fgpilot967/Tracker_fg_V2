@@ -7,7 +7,7 @@ body {
 }
 
 :root {
-  --navbar-height: 60px;
+  --navbar-height: 70px;
 }
 
 .navbar {
@@ -37,7 +37,6 @@ body {
   text-decoration: none;
   border-radius: 20px;
 }
-
 
 .dropdown {
   float: left;
@@ -129,6 +128,7 @@ input[type="text"] {
   margin-top: 60px;
   margin-left: 80px;
 }
+
 
 .tablinks {
   margin-right: 50px;

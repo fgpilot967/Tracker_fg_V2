@@ -163,4 +163,22 @@ function setupLiveCalculation(pilotNumber, numberOfRowsPilots) {
   }
 }
 
+/*
+Funktioniert im Moment nicht. Weil tabContent nicht da ist. Habe ein Problem mit tab.js !!!!!
+
+document.getElementsById("tabContent").addEventListener("change", () => {
+  console.log("eine Änderung");
+  document.getElementById("saveButton").style.backgroundColor= "red";
+});
+*/
+
+// Daher diese Zwischenlösung
+export function markSaveNeeded() {
+  document.getElementById("saveButton").style.backgroundColor = "red";
+}
+
+
+
+
+
 

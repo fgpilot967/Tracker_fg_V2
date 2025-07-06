@@ -22,6 +22,8 @@ export async function saveTrackerData() {
   updateArrayExpiryPilotTable(numberOfRowsPilots, numberOfPilots);
   updateArrayRemDaysPilotTable(numberOfRowsPilots, numberOfPilots);
 
+  document.getElementById("saveButton").style.backgroundColor = "#333";
+
   const user = window.user;
   const data = {
     pilotNames,
